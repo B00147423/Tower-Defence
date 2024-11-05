@@ -4,10 +4,6 @@
 #include <iostream>
 
 
-
-void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
-    glViewport(0, 0, width, height);
-}
 void framebuffer_size(GLFWwindow* window, int width, int height){
     // Sets the OpenGL viewport to cover the whole window
     glViewport(0,0,width,height);
