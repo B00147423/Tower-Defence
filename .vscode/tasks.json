@@ -1,0 +1,35 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "Build Main",
+            "command": "C:/msys64/ucrt64/bin/g++.exe",
+            "args": [
+                "-g",
+                "-Wall",
+                "-I${workspaceFolder}/libs/glad/include",
+                "-I${workspaceFolder}/libs/glfw-3.4.bin.WIN64/include",
+                "-I${workspaceFolder}/libs/glm-master",
+                "${workspaceFolder}/src/main.cpp",
+                "${workspaceFolder}/libs/glad/src/glad.c",
+                "-L${workspaceFolder}/libs/glfw-3.4.bin.WIN64/lib-mingw-w64",
+                "-lglfw3",
+                "-lopengl32",
+                "-lgdi32",
+                "-o",
+                "${workspaceFolder}/build/Debug/TowerDefenseGame.exe" 
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
