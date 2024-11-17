@@ -54,6 +54,7 @@
         "*.chh": "cpp",
         "cstring": "cpp",
         "*.editorconfig": "cpp",
-        "sstream": "cpp"
+        "sstream": "cpp",
+        "fstream": "cpp"
     }
 }

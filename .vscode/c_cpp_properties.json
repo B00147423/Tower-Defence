@@ -8,9 +8,7 @@
                 "${workspaceFolder}/libs/glm-master",
                 "${workspaceFolder}/src",
                 "${workspaceFolder}/libs",
-                "${workspaceFolder}/imgui",
-                "${workspaceFolder}/src/Layouts",
-                "${workspaceFolder}/src/Assets"
+                "${workspaceFolder}/imgui"
             ],
             "defines": [
                 "_DEBUG",

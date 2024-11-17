@@ -3,12 +3,6 @@ project(TowerDefenseGame)
 
 set(CMAKE_CXX_STANDARD 17)
 
-# Set compiler-specific flags for MSVC
-if (MSVC)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MD")
-    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /NODEFAULTLIB:libcmt.lib /NODEFAULTLIB:libcmtd.lib /NODEFAULTLIB:libvcruntime.lib /NODEFAULTLIB:msvcrt.lib /NODEFAULTLIB:libcpmt.lib /NODEFAULTLIB:libcpmtd.lib")
-endif()
-
 # Set paths for precompiled GLFW library
 set(GLFW_LIB_DIR "${CMAKE_SOURCE_DIR}/libs/glfw-3.4.bin.WIN64/lib-vc2022")
 set(GLFW_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/libs/glfw-3.4.bin.WIN64/include")
@@ -29,17 +23,8 @@ link_directories(${GLFW_LIB_DIR})
 set(SOURCES 
     src/main.cpp 
     src/Engine/AssetManager.cpp
-    src/Engine/Audio.cpp
-    src/Engine/Component.cpp
-    src/Engine/Entity.cpp
-    src/Engine/Input.cpp
-    src/Engine/Physics.cpp
-    src/Engine/Renderer.cpp
-    src/Engine/Scene.cpp
-    src/Engine/Shader.cpp
-    src/Engine/Timer.cpp
-    src/Engine/UIElements.cpp
-    src/Engine/Window.cpp
+    src/Engine/loadTexture.cpp
+    src/Engine/window.cpp
     libs/glad/src/glad.c
 )
 # Add ImGui source files

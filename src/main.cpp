@@ -1,90 +1,82 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include "./Engine/Renderer.h"
-#include "./Engine/AssetManager.h"
-#include <iostream>
-#include <fstream>
-#include <sstream>
+#include <GLFW/glfw3.h>
+#include <windows.h>
 #include <string>
-using namespace std;
-
-// Helper function to read shader code from a file
-std::string readShaderFile(const char* filePath) {
-    std::ifstream file(filePath);
-    std::stringstream buffer;
-    buffer << file.rdbuf();
-    return buffer.str();
-}
-
-GLuint createShaderProgram(const char* vertexPath, const char* fragmentPath) {
-    std::string vertexCode = readShaderFile(vertexPath);
-    const char* vShaderCode = vertexCode.c_str();
-
-    std::string fragmentCode = readShaderFile(fragmentPath);
-    const char* fShaderCode = fragmentCode.c_str();
-
-    GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(vertexShader, 1, &vShaderCode, NULL);
-    glCompileShader(vertexShader);
-
-    GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(fragmentShader, 1, &fShaderCode, NULL);
-    glCompileShader(fragmentShader);
-
-    GLuint shaderProgram = glCreateProgram();
-    glAttachShader(shaderProgram, vertexShader);
-    glAttachShader(shaderProgram, fragmentShader);
-    glLinkProgram(shaderProgram);
-
-    glDeleteShader(vertexShader);
-    glDeleteShader(fragmentShader);
-
-    return shaderProgram;
-}
+//#include "FilePicker.cpp"
+#include "./Engine/header/window.hpp"
 
 int main() {
-    if (!glfwInit()) {
-        cerr << "Failed to initialize GLFW" << endl;
-        return -1;
-    }
-
-    GLFWwindow* window = glfwCreateWindow(800, 600, "Full-Screen Texture", NULL, NULL);
-    if (!window) {
-        cerr << "Failed to create GLFW window" << endl;
-        glfwTerminate();
-        return -1;
-    }
-    glfwMakeContextCurrent(window);
-
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
-        cerr << "Failed to initialize GLAD" << endl;
-        return -1;
-    }
-
-    Renderer renderer;
-    renderer.init();
-
-    // Assuming AssetManager handles texture loading
-    AssetManager assetManager;
-    GLuint texture = assetManager.loadTexture("C:/Users/beka/Tower-Defence/src/map2.png");
-    if (texture == 0) {
-        cerr << "Failed to load texture." << endl;
-        glfwDestroyWindow(window);
-        glfwTerminate();
-        return -1;
-    }
-
-    while (!glfwWindowShouldClose(window)) {
-        renderer.clear();
-
-        // Draw the full-screen quad
-        renderer.drawFullScreenQuad(texture);
-
-        glfwSwapBuffers(window);
-        glfwPollEvents();
-    }
-
-    glfwDestroyWindow(window);
-    glfwTerminate();
+    {
+        Window myWindow;
+        myWindow.InitializeWindow(); 
+        myWindow.OpenWindow();
+    } 
     return 0;
 }
+
+
+
+//// Callback function for handling mouse clicks
+//static void mouse_button_callback(GLFWwindow* window, int button, int action, int mods) {
+//    if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
+//        // Get the mouse position
+//        double xpos, ypos;
+//        glfwGetCursorPos(window, &xpos, &ypos);
+//
+//        // Convert screen coordinates to OpenGL coordinates
+//        int width, height;
+//        glfwGetWindowSize(window, &width, &height);
+//        float x = xpos / width * 2 - 1;
+//        float y = 1 - ypos / height * 2;
+//
+//        // Check if the mouse is inside the button bounds
+//        if (x >= BUTTON_RECT.x1 && x <= BUTTON_RECT.x2 && y >= BUTTON_RECT.y1 && y <= BUTTON_RECT.y2) {
+//            // Open file picker dialog every time the button is clicked
+//            std::wstring filePath = openFilePicker();
+//
+//            if (!filePath.empty()) {
+//                std::wcout << L"Selected file: " << filePath << std::endl;
+//            }
+//            else {
+//                std::wcout << L"No file selected." << std::endl;
+//            }
+//        }
+//    }
+//}
+//
+//int main() {
+//    if (!glfwInit()) return -1;
+//
+//    GLFWwindow* window = glfwCreateWindow(800, 600, "OpenGL File Picker Button", NULL, NULL);
+//    if (!window) {
+//        glfwTerminate();
+//        return -1;
+//    }
+//
+//    glfwMakeContextCurrent(window);
+//
+//    // Set the mouse callback function
+//    glfwSetMouseButtonCallback(window, mouse_button_callback);
+//
+//    while (!glfwWindowShouldClose(window)) {
+//        glClear(GL_COLOR_BUFFER_BIT);
+//
+//        // Render the button (a rectangle)
+//        glColor3f(BUTTON_COLOR.r, BUTTON_COLOR.g, BUTTON_COLOR.b); // Set button color
+//
+//        glBegin(GL_QUADS); // Draw the button
+//        glVertex2f(BUTTON_RECT.x1, BUTTON_RECT.y1); // Bottom-left corner
+//        glVertex2f(BUTTON_RECT.x2, BUTTON_RECT.y1); // Bottom-right corner
+//        glVertex2f(BUTTON_RECT.x2, BUTTON_RECT.y2); // Top-right corner
+//        glVertex2f(BUTTON_RECT.x1, BUTTON_RECT.y2); // Top-left corner
+//        glEnd();
+//
+//        glfwSwapBuffers(window);
+//        glfwPollEvents();
+//    }
+//
+//    glfwDestroyWindow(window);
+//    glfwTerminate();
+//    return 0;
+//}
